@@ -1,11 +1,10 @@
 #!/bin/bash
 set -eu
 
-ARTIFACT_PATH=$1
-ARTIFACT_VERSION=$2
-
-#pwd
-cd ${ARTIFACT_PATH}
+if [ $# -eq 1 ]
+  then
+    cd $1
+fi
 
 working_dir=$(pwd)
 
@@ -43,7 +42,7 @@ cd build/deployment;
 
 zip -X -r ../lambda.zip *  -x "*.pyc"
 
-cd ../../; rm -r build/deployment ; rm -r $virtual_env_dir
+cd ../../; rm -r build/deployment ;
 
 echo "ZIP_LOCATION=$working_dir/build/lambda.zip"
 
