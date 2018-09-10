@@ -28,34 +28,13 @@ def get_sha(url):
     return git_runner.get_last_commit(url).split('\t', 1)[0]
 
 
-def create_common_release(ci_url):
-    common_data = {
-        "m2a-ci": {
-            "sha": get_sha(ci_url)
-        },
-        "artifact_id": ARTIFACT_ID
-    }
-    create_release_file(common_data)
-
-
-def create_module_release(module_url, ci_url):
-    modules_data = {
-        "sha": get_sha(module_url),
-        "m2a-ci": {
-            "sha": get_sha(ci_url)
-        },
-        "artifact_id": ARTIFACT_ID
-    }
-    create_release_file(modules_data)
-
-
-def create_release_file(module_data, module_name):
+def create_release_file(module_data, module_name='m2aci'):
     """
 
     :param module_data: JSON object with module SHA, m2a-ci SHA and artifact id
     :param module_name: Module we are deploying
     """
-    path = "m2a-releases/m2a-ci/{}.json".format(module_name)
+    path = "m2a-releases/m2aci/{}.json".format(module_name)
     if not os.path.exists(os.path.dirname(path)):
         try:
             os.makedirs(os.path.dirname(path))
@@ -103,9 +82,18 @@ class GitRunner:
         return self._run_cmd(cmd)
 
 
+data = {
+    "m2aci": {
+        "sha": get_sha(M2A_CI_URL)
+    },
+    "artifact_id": ARTIFACT_ID
+}
+
 if MODULE:
     m2a_module_url = "git@bitbucket.org:m2amedia/{}.git".format(MODULE)
-    create_module_release(m2a_module_url, M2A_CI_URL)
+    data['sha'] = get_sha(m2a_module_url)
+    create_release_file(data, MODULE)
 else:
-    create_common_release(M2A_CI_URL)
+    create_release_file(data)
+
 
