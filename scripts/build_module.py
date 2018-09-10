@@ -21,7 +21,7 @@ ARTIFACT_ID = args.artifact_id
 MODULE = args.module
 
 m2a_ci_url = "git@bitbucket.org:m2amedia/m2a-ci.git"
-m2a_module_url = "git@bitbucket.org:m2amedia/{}.git".format(module)
+m2a_module_url = "git@bitbucket.org:m2amedia/{}.git".format(MODULE)
 
 
 def update_m2a_ci(build_version, module_name):
