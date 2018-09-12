@@ -26,8 +26,9 @@ M2A_CI_URL = "git@bitbucket.org:m2amedia/m2a-ci.git"
 
 
 def get_sha(url):
-    git_runner = GitRunner('/usr/bin/git', LOGGER)
-    return git_runner.get_last_commit(url).split('\t', 1)[0]
+    git_runner = GitRunner('/usr/local/bin/git', LOGGER)
+    result = git_runner.get_last_commit(url)
+    return result.split('\t', 1)[0]
 
 
 def create_release_file(module_data, module_name='m2aci'):
@@ -62,7 +63,7 @@ class GitRunner:
             output, stderr = process.communicate()
             ret_code = process.wait()
             if ret_code == 0:
-                return output
+                return output.decode("utf-8")
             else:
                 error_message = "ERROR whilst running cmd {} - error {} ".format(cmd, stderr)
                 self.logger.error(error_message)
