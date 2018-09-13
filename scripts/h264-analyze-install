@@ -1,0 +1,16 @@
+#!/bin/bash
+set -eux
+
+CHECKOUT_DIR=h264bitstream
+cd /tmp/
+
+git clone --depth 1 --branch 0.2.0 https://github.com/aizvorski/h264bitstream.git ${CHECKOUT_DIR}
+cd ${CHECKOUT_DIR}
+
+autoreconf -i 
+./configure --prefix=/usr/local
+make
+make install
+
+cd ..
+rm -r ${CHECKOUT_DIR}
