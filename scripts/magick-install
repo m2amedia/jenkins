@@ -1,0 +1,25 @@
+#!/bin/bash
+set -eux
+
+# Reference: https://www.imagemagick.org/script/install-source.php
+
+CHECKOUT_DIR=ImageMagick-7.0.8-12
+
+cd /tmp
+
+wget https://www.imagemagick.org/download/${CHECKOUT_DIR}.tar.gz
+tar xvzf ${CHECKOUT_DIR}.tar.gz
+cd ${CHECKOUT_DIR}
+./configure
+make
+sudo make install
+
+# You may need to configure the dynamic linker run-time bindings:
+sudo ldconfig /usr/local/lib
+
+# Print version
+identify -version
+
+# clean-up
+rm -rf ${CHECKOUT_DIR}
+rm -rf ${CHECKOUT_DIR}.tar.gz

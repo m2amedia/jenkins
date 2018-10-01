@@ -13,5 +13,8 @@ autoreconf -i
 make
 make install
 
+# Configure the dynamic linker run-time bindings:
+sudo ldconfig /usr/local/lib
+
 cd ..
 rm -r ${CHECKOUT_DIR}
