@@ -3,7 +3,7 @@ FROM jenkins/jenkins:2.125
 
 USER root
 
-RUN apt-get update && apt-get install -y bash git wget openssh-server vim gettext make docker awscli ruby ruby-build python-pip htop libssl-dev libreadline-dev zlib1g-dev ffmpeg build-essential libtool autoconf
+RUN apt-get update && apt-get install -y bash git wget openssh-server vim gettext make docker awscli ruby ruby-build python-pip htop libssl-dev libreadline-dev zlib1g-dev ffmpeg build-essential libtool autoconf tesseract-ocr libtesseract-dev
 RUN apt-get install -y supervisor
 RUN apt-get install -y python3
 
@@ -73,7 +73,9 @@ ENV PATH="/usr/share/jenkins/scripts:${PATH}"
 
 # Install h264_analyze
 RUN /usr/share/jenkins/scripts/h264-analyze-install
-ENV LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+
+# Install ImageMagick
+RUN /usr/share/jenkins/scripts/magick-install
 
 # Drop back to the regular jenkins user
 USER jenkins
