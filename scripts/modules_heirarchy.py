@@ -7,16 +7,15 @@ import json
 from collections import deque
 
 parser = argparse.ArgumentParser(description="Create a release file")
-parser.add_argument('--ci', help="Set to true if a ci environment to set common modules as external",
-                    action='store_true')
+parser.add_argument('--e', help="List of external dependencies (eg ci environments rely on networking)", nargs="*")
 parser.add_argument('--target', help="Path to modules.json file")
 args = parser.parse_args()
-ci = args.ci
+external_dependencies = args.e
 target = args.target
 
 data = {}
-if ci:
-    data['external_dependencies'] = ['networking']
+if external_dependencies:
+    data['external_dependencies'] = external_dependencies
 
 modules = {}
 for dir_path, _, filenames in os.walk('.'):
