@@ -2,17 +2,26 @@
 FROM jenkins/jenkins:2.125
 
 USER root
-
-RUN apt-get update && apt-get install -y bash git wget openssh-server vim gettext make docker awscli ruby ruby-build python-pip htop libssl-dev libreadline-dev zlib1g-dev ffmpeg
+RUN apt-get update && apt-get install -y bash git wget openssh-server vim gettext make docker awscli ruby ruby-build python-pip htop libssl-dev libreadline-dev zlib1g-dev ffmpeg build-essential libtool autoconf tesseract-ocr libtesseract-dev jq
 RUN apt-get install -y supervisor
-RUN apt-get install -y python3
 
 # Install pip
 ADD requirements.txt /root/requirements.txt
 RUN pip install -r /root/requirements.txt
 
+#install pipenv
+RUN pip install --user pipenv
+
+# get and build python 3.6
+RUN apt-get install -y libncurses5-dev libncursesw5-dev libsqlite3-dev
+RUN apt-get install -y libgdbm-dev libdb5.3-dev libbz2-dev libexpat1-dev liblzma-dev tk-dev
+RUN wget https://www.python.org/ftp/python/3.6.1/Python-3.6.1.tar.xz
+RUN tar xf Python-3.6.1.tar.xz
+RUN cd Python-3.6.1 && ./configure --enable-optimizations && make -j 8 && make altinstall
+
+
 # Install m2a-git-mirror
-RUN virtualenv /opt/m2a-git-mirror/ -p python3.5
+RUN virtualenv /opt/m2a-git-mirror/ -p python3.6
 RUN /opt/m2a-git-mirror/bin/pip \
     install git+https://bitbucket.org/m2amedia/m2a-git-mirror.git
 RUN ln -s /opt/m2a-git-mirror/bin/m2a-git-mirror /usr/bin
@@ -70,6 +79,12 @@ RUN chown -R jenkins:jenkins /usr/share/jenkins/scripts
 RUN chmod +x /usr/share/jenkins/scripts
 RUN chmod +x /usr/share/jenkins/scripts/*
 ENV PATH="/usr/share/jenkins/scripts:${PATH}"
+
+# Install h264_analyze
+RUN /usr/share/jenkins/scripts/h264-analyze-install
+
+# Install ImageMagick
+RUN /usr/share/jenkins/scripts/magick-install
 
 # Drop back to the regular jenkins user
 USER jenkins

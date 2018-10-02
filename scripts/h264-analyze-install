@@ -1,0 +1,20 @@
+#!/bin/bash
+set -eux
+
+CHECKOUT_DIR=h264bitstream-0.1.9
+cd /tmp/
+
+curl -L https://sourceforge.net/projects/h264bitstream/files/h264bitstream/0.1.9/${CHECKOUT_DIR}.tar.gz/download -o ${CHECKOUT_DIR}.tar.gz
+tar -xvzf ${CHECKOUT_DIR}.tar.gz
+cd ${CHECKOUT_DIR}
+
+autoreconf -i 
+./configure --prefix=/usr/local
+make
+make install
+
+# Configure the dynamic linker run-time bindings:
+sudo ldconfig /usr/local/lib
+
+cd ..
+rm -r ${CHECKOUT_DIR}

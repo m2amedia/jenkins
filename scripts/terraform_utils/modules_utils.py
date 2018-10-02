@@ -77,7 +77,7 @@ def has_terraform_dir(path):
     return True if os.path.isdir("{}/terraform".format(path)) else False
 
 
-def has_module_file(module_dir):
+def get_module_file(module_dir):
     module_file = "{}/modules.tf".format(module_dir)
     try:
         sh.ls(module_file)
