@@ -7,7 +7,7 @@ import json
 from collections import deque
 
 parser = argparse.ArgumentParser(description="Create a release file")
-parser.add_argument('--e', help="List of external dependencies (eg ci environments rely on networking)", nargs="*")
+parser.add_argument('--e', help="Space separated list of external dependencies (eg ci environments rely on networking)", nargs="*")
 parser.add_argument('--target', help="Path to modules.json file")
 args = parser.parse_args()
 external_dependencies = args.e
