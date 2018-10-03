@@ -17,7 +17,7 @@ RUN apt-get install -y libncurses5-dev libncursesw5-dev libsqlite3-dev
 RUN apt-get install -y libgdbm-dev libdb5.3-dev libbz2-dev libexpat1-dev liblzma-dev tk-dev
 RUN wget https://www.python.org/ftp/python/3.6.1/Python-3.6.1.tar.xz
 RUN tar xf Python-3.6.1.tar.xz
-RUN cd Python-3.6.1 && ./configure --enable-optimizations && make -j 8 && make altinstall
+RUN cd Python-3.6.1 && ./configure --enable-optimizations --with-lto && make -j 8 && make altinstall
 
 
 # Install m2a-git-mirror
