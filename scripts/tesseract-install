@@ -1,0 +1,32 @@
+#!/bin/bash
+
+set -eux
+
+cd /tmp
+
+#Install Leptonica from Source
+wget http://www.leptonica.com/source/leptonica-1.75.3.tar.gz
+tar -zxvf leptonica-1.75.3.tar.gz
+cd leptonica-1.75.3
+./autobuild
+./configure
+make
+make install
+cd ..
+
+#Install Tesseract from Source
+wget https://github.com/tesseract-ocr/tesseract/archive/3.05.02.tar.gz
+tar -zxvf 3.05.02.tar.gz
+cd tesseract-3.05.02
+pwd
+./autogen.sh
+./configure
+make
+make install
+ldconfig
+cd ..
+
+#Download and install tesseract language files
+wget https://github.com/tesseract-ocr/tessdata/raw/3.04.00/eng.traineddata
+wget https://github.com/tesseract-ocr/tessdata/raw/3.04.00/osd.traineddata
+mv *.traineddata /usr/local/share/tessdata

@@ -2,7 +2,7 @@
 FROM jenkins/jenkins:2.147
 
 USER root
-RUN apt-get update && apt-get install -y bash git wget openssh-server vim gettext make docker awscli ruby ruby-build python-pip htop libssl-dev libreadline-dev zlib1g-dev ffmpeg build-essential libtool autoconf tesseract-ocr libtesseract-dev jq
+RUN apt-get update && apt-get install -y bash git wget openssh-server vim gettext make docker awscli ruby ruby-build python-pip htop libssl-dev libreadline-dev zlib1g-dev ffmpeg build-essential libtool autoconf libjpeg-dev jq
 RUN apt-get install -y supervisor
 
 # Install pip
@@ -85,6 +85,9 @@ RUN /usr/share/jenkins/scripts/h264-analyze-install
 
 # Install ImageMagick
 RUN /usr/share/jenkins/scripts/magick-install
+
+# Install tesseract
+RUN /usr/share/jenkins/scripts/tesseract-install
 
 # Drop back to the regular jenkins user
 USER jenkins
