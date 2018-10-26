@@ -3,7 +3,7 @@ set -eux
 
 # Reference: https://www.imagemagick.org/script/install-source.php
 
-CHECKOUT_DIR=ImageMagick-7.0.8-12
+CHECKOUT_DIR=ImageMagick-7.0.8-14
 
 cd /tmp
 
