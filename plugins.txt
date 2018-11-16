@@ -145,3 +145,4 @@ workflow-scm-step:2.7
 workflow-step-api:2.16
 workflow-support:2.21
 ws-cleanup:0.36
+cucumber-reports:4.2.0
