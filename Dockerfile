@@ -10,8 +10,7 @@ ADD requirements.txt /root/requirements.txt
 RUN pip install -r /root/requirements.txt
 
 #install pipenv
-RUN pip install --user pipenv
-ENV PATH="/root/.local/bin:${PATH}"
+RUN pip install pipenv
 
 # get and build python 3.6
 RUN apt-get install -y libncurses5-dev libncursesw5-dev libsqlite3-dev
