@@ -85,7 +85,7 @@ ENV PATH="/usr/share/jenkins/scripts:${PATH}"
 RUN /usr/share/jenkins/scripts/h264-analyze-install
 
 # Install ImageMagick
-# RUN /usr/share/jenkins/scripts/magick-install
+RUN /usr/share/jenkins/scripts/magick-install
 
 # Install tesseract
 RUN /usr/share/jenkins/scripts/tesseract-install
