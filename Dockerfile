@@ -11,9 +11,7 @@ RUN pip install -r /root/requirements.txt
 
 #install pipenv
 RUN pip install --user pipenv
-RUN export PYTHON_USER_BASE=$(python -m site --user-base)
-RUN ln -s "${PYTHON_USER_BASE}/bin/pipenv" /usr/local/bin
-ENV PATH="${PYTHON_USER_BASE}/bin:${PATH}"
+ENV PATH="/root/.local/bin:${PATH}"
 
 # get and build python 3.6
 RUN apt-get install -y libncurses5-dev libncursesw5-dev libsqlite3-dev
