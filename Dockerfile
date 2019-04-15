@@ -10,7 +10,7 @@ ADD requirements.txt /root/requirements.txt
 RUN pip install -r /root/requirements.txt
 
 #install pipenv
-RUN pip install --user pipenv
+RUN pip install pipenv
 
 # get and build python 3.6
 RUN apt-get install -y libncurses5-dev libncursesw5-dev libsqlite3-dev
@@ -30,7 +30,7 @@ RUN ln -s /opt/m2a-git-mirror/bin/m2a-git-mirror /usr/bin
 COPY supervisor/ /etc/supervisor/conf.d/
 
 # Download terraform binary
-ENV TERRAFORM_VERSION=0.11.8
+ENV TERRAFORM_VERSION=0.11.11
 RUN cd /tmp && \
     wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
     unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip -d /usr/bin && \

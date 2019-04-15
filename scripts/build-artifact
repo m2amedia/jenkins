@@ -37,7 +37,14 @@ else
     rm -r "$virtual_env_dir"
 fi
 
-cp -r src/* build/deployment/
+if [ -f "setup.py" ]; then
+    python setup.py sdist
+    python -m pip install dist/* -t build/deployment/
+    rm -rf dist
+    rm -rf *.egg-info
+else
+    cp -r src/* build/deployment/
+fi
 
 cd build/deployment;
 
@@ -46,6 +53,3 @@ zip -X -r ../lambda.zip *  -x "*.pyc"
 cd ../../; rm -r build/deployment ;
 
 echo "ZIP_LOCATION=$working_dir/build/lambda.zip"
-
-
-
