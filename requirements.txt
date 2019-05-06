@@ -3,3 +3,4 @@ pyhcl
 sh
 virtualenv
 virtualenv-clone
+ansible
