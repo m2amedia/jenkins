@@ -5,7 +5,9 @@ USER root
 RUN apt-get update && apt-get install -y bash git wget openssh-server vim gettext make docker awscli ruby ruby-build python-pip htop libssl-dev libreadline-dev zlib1g-dev ffmpeg build-essential libtool autoconf libjpeg-dev jq
 RUN apt-get install -y supervisor
 
-# Install pip
+RUN pip install --upgrade pip
+
+# Install pips
 ADD requirements.txt /root/requirements.txt
 RUN pip install -r /root/requirements.txt
 
@@ -19,9 +21,6 @@ RUN wget https://www.python.org/ftp/python/3.6.1/Python-3.6.1.tar.xz
 RUN tar xf Python-3.6.1.tar.xz
 RUN cd Python-3.6.1 && ./configure && make -j 8 && make altinstall
 
-# make sure the most recent versions of pipenv and pip are installed
-RUN python -m pip install --upgrade pipenv
-RUN python -m pip install --upgrade pip
 
 # Install m2a-git-mirror
 RUN virtualenv /opt/m2a-git-mirror/ -p python3.6
