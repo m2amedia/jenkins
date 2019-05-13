@@ -19,6 +19,9 @@ RUN wget https://www.python.org/ftp/python/3.6.1/Python-3.6.1.tar.xz
 RUN tar xf Python-3.6.1.tar.xz
 RUN cd Python-3.6.1 && ./configure && make -j 8 && make altinstall
 
+# make sure the most recent versions of pipenv and pip are installed
+RUN python -m pip install --upgrade pipenv
+RUN python -m pip install --upgrade pip
 
 # Install m2a-git-mirror
 RUN virtualenv /opt/m2a-git-mirror/ -p python3.6
