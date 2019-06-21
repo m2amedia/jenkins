@@ -1,13 +1,13 @@
 #!/bin/bash
 set -eux
 
-# Reference: https://www.imagemagick.org/script/install-source.php
-
-CHECKOUT_DIR=ImageMagick-7.0.8-12
+VERSION=7.0.8-14
+CHECKOUT_DIR=ImageMagick-${VERSION}
 
 cd /tmp
 
-wget https://www.imagemagick.org/download/${CHECKOUT_DIR}.tar.gz
+wget -O ${CHECKOUT_DIR}.tar.gz https://github.com/ImageMagick/ImageMagick/archive/${VERSION}.tar.gz
+
 tar xvzf ${CHECKOUT_DIR}.tar.gz
 cd ${CHECKOUT_DIR}
 ./configure
