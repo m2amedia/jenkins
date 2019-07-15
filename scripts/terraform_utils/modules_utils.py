@@ -56,7 +56,7 @@ def get_module_source_paths(modules, source_path):
     paths = dict()
     for module in modules:
         if module not in services:
-            print "Error: Module {} not found in path: {}".format(module, source_path)
+            print("Error: Module {} not found in path: {}".format(module, source_path))
             continue
         directory = services[module]
         if has_terraform_dir(directory):
@@ -68,7 +68,7 @@ def get_module_source_paths(modules, source_path):
 
 def get_module_source_terraform_paths(modules, source_path):
     module_paths = get_module_source_paths(modules, source_path)
-    for module, path in module_paths.iteritems():
+    for module, path in module_paths.items():
         module_paths[module] = "{}/terraform".format(path)
     return module_paths
 

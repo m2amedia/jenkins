@@ -1,6 +1,11 @@
+--extra-index-url https://pypi.m2amedia.services/pypi/
+
 netaddr
 pyhcl
 sh
 virtualenv
 virtualenv-clone
 ansible
+boto3
+
+m2a_process_helper
