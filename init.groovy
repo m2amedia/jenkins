@@ -78,6 +78,7 @@ def configureMatrixAuthorizationStrategy = { jenkinsUser, jenkinsPassword ->
     def user = jenkins.getSecurityRealm().createAccount(jenkinsUser, jenkinsPassword)
     user.save()
     jenkins.getAuthorizationStrategy().add(Jenkins.ADMINISTER, jenkinsUser)
+    jenkins.getAuthorizationStrategy().add(Jenkins.ADMINISTER, "authenticated")
     jenkins.save()
 }
 
