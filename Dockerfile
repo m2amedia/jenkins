@@ -31,14 +31,10 @@ RUN ln -s /opt/m2a-git-mirror/bin/m2a-git-mirror /usr/bin
 # Install service configurations
 COPY supervisor/ /etc/supervisor/conf.d/
 
-# Download terraform binary
-ENV TERRAFORM_VERSION=0.11.13
-RUN cd /tmp && \
-    wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
-    unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip -d /usr/bin && \
-    rm -rf /tmp/* && \
-    rm -rf /var/cache/apk/* && \
-    rm -rf /var/tmp/*
+# Install TFENV
+ARG versions="0.11.11 0.11.13"
+RUN git clone https://github.com/tfutils/tfenv.git /.tfenv && \
+  for version in ${versions}; do /.tfenv/bin/tfenv install ${version}; done
 RUN terraform -v
 
 # Download packer binary
