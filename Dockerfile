@@ -33,8 +33,8 @@ COPY supervisor/ /etc/supervisor/conf.d/
 
 # Install TFENV
 ARG versions="0.11.11 0.11.13"
-RUN git clone https://github.com/tfutils/tfenv.git /.tfenv && \
-  for version in ${versions}; do /.tfenv/bin/tfenv install ${version}; done
+RUN git clone https://github.com/tfutils/tfenv.git ~/.tfenv && \
+  for version in ${versions}; do ~/.tfenv/bin/tfenv install ${version}; done
 RUN terraform -v
 
 # Download packer binary
