@@ -2,7 +2,7 @@
 FROM jenkins/jenkins:2.179
 
 USER root
-RUN apt-get update && apt-get install -y bash git wget openssh-server vim gettext make docker awscli ruby ruby-build python-pip htop libssl-dev libreadline-dev zlib1g-dev ffmpeg build-essential libtool autoconf libjpeg-dev jq
+RUN apt-get update && apt-get install -y bash git wget openssh-server vim gettext make docker ruby ruby-build python-pip htop libssl-dev libreadline-dev zlib1g-dev ffmpeg build-essential libtool autoconf libjpeg-dev jq
 RUN apt-get install -y supervisor
 
 RUN pip install --upgrade pip
@@ -35,6 +35,8 @@ COPY supervisor/ /etc/supervisor/conf.d/
 ARG versions="0.11.11 0.11.13"
 RUN git clone https://github.com/tfutils/tfenv.git ~/.tfenv && \
   for version in ${versions}; do ~/.tfenv/bin/tfenv install ${version}; done
+RUN ln -s ~/.tfenv/bin/* /usr/local/bin
+RUN which tfenv
 RUN terraform -v
 
 # Download packer binary
