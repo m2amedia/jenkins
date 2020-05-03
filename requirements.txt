@@ -1,12 +1,13 @@
 --extra-index-url https://pypi.m2amedia.services/pypi/
 
-netaddr
-pyhcl
-sh
-virtualenv
-virtualenv-clone
-ansible
-boto3
-awscli
+setuptools==42.0.2
+netaddr==0.7.19
+pyhcl==0.3.12
+sh==1.12.14
+virtualenv==16.7.8
+virtualenv-clone==0.5.3
+ansible==2.9.2
+boto3==1.13.1
+awscli==1.18.51
 
-m2a_process_helper
+m2a_process_helper==0.3.1
