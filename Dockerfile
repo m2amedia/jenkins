@@ -7,13 +7,6 @@ RUN apt-get install -y supervisor
 
 RUN pip install --upgrade pip
 
-# Install pips
-ADD requirements.txt /root/requirements.txt
-RUN pip install -r /root/requirements.txt
-
-#install pipenv
-RUN pip install pipenv
-
 # get and build python 3.6
 RUN apt-get install -y libncurses5-dev libncursesw5-dev libsqlite3-dev
 RUN apt-get install -y libgdbm-dev libdb5.3-dev libbz2-dev libexpat1-dev liblzma-dev tk-dev
@@ -21,6 +14,12 @@ RUN wget https://www.python.org/ftp/python/3.6.1/Python-3.6.1.tar.xz
 RUN tar xf Python-3.6.1.tar.xz
 RUN cd Python-3.6.1 && ./configure && make -j 8 && make altinstall
 
+# Install pips
+ADD requirements.txt /root/requirements.txt
+RUN pip3 install -r /root/requirements.txt
+
+#install pipenv
+RUN pip3 install pipenv
 
 # Install m2a-git-mirror
 RUN virtualenv /opt/m2a-git-mirror/ -p python3.6
