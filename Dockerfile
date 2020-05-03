@@ -37,7 +37,6 @@ RUN git clone https://github.com/tfutils/tfenv.git ~/.tfenv && \
   for version in ${versions}; do ~/.tfenv/bin/tfenv install ${version}; done
 RUN ln -s ~/.tfenv/bin/* /usr/local/bin
 RUN which tfenv
-RUN terraform -v
 
 # Download packer binary
 ENV PACKER_VERSION=1.2.4
